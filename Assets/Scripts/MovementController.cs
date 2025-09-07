@@ -8,7 +8,7 @@ public class MovementController : MonoBehaviour
 
     [Header("Settings")]
     [SerializeField] private CharacterController characterController;
-    private InputController inputController;
+    [SerializeField] private InputController inputController;
     private bool canMove = true;
     private Vector3 gravity;
     public bool CanMove => canMove;
@@ -17,7 +17,6 @@ public class MovementController : MonoBehaviour
     {
         Cursor.lockState = CursorLockMode.Locked;
         gravity = Vector3.zero;
-        inputController = new InputController();
     }
 
     private void Update()
@@ -25,16 +24,16 @@ public class MovementController : MonoBehaviour
         Movement();
     }
 
+
     public void Movement()
     {
-        Vector2 forwardMovement = transform.forward * inputController.movement.y * speed * Time.deltaTime;
-        Vector2 rightMovement = transform.right * inputController.movement.x * speed * Time.deltaTime;
+        Vector3 forwardMovement = transform.forward * inputController.movement.y * speed * Time.deltaTime;
+        Vector3 rightMovement = transform.right * inputController.movement.x * speed * Time.deltaTime;
 
         if (characterController.isGrounded && gravity.y < 0)
         {
             gravity.y = 0;
         }
-        Debug.Log(forwardMovement);
 
         gravity.y += Physics.gravity.y * Time.deltaTime * Time.deltaTime;
 
