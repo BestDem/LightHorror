@@ -9,6 +9,7 @@ public class MovementController : MonoBehaviour
     [Header("Settings")]
     [SerializeField] private CharacterController characterController;
     [SerializeField] private InputController inputController;
+    private Animator animator;
     private bool canMove = true;
     private Vector3 gravity;
     public bool CanMove => canMove;
@@ -17,11 +18,13 @@ public class MovementController : MonoBehaviour
     {
         Cursor.lockState = CursorLockMode.Locked;
         gravity = Vector3.zero;
+        animator = GetComponent<Animator>();
     }
 
     private void Update()
     {
         Movement();
+        AnimationWalk();
     }
 
 
@@ -40,6 +43,14 @@ public class MovementController : MonoBehaviour
         characterController.Move(forwardMovement);
         characterController.Move(rightMovement);
         characterController.Move(gravity);
+    }
+
+    private void AnimationWalk()
+    {
+        if (Mathf.RoundToInt(inputController.movement.y) != 0f || Mathf.RoundToInt(inputController.movement.x) != 0f)
+            animator.SetInteger("Walk", 1);
+        else
+            animator.SetInteger("Walk", 0);
     }
 
     public void SetCanMove(bool value)

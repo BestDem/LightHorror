@@ -28,7 +28,7 @@ public class UseController : MonoBehaviour
             {
                 aim.SetActive(true);
                 if (inputController.isFire)
-                    useObject.Use();
+                    useObject.Use(head);
             }
             else
             {
