@@ -9,6 +9,7 @@ public class MonsterReview : MonoBehaviour
     [SerializeField] private Transform[] routePoints;
     [SerializeField] private GameObject player;
     [SerializeField] private float viewingAngle;
+    [SerializeField] private FlashlightController flashlight;
     private NavMeshAgent monster;
     private bool isFollowing = false;
     private bool isWalkMonstor = false;

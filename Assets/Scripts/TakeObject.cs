@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class TakeObject : MonoBehaviour, IUsable
 {
+    [SerializeField] private string keyObject;
     private Transform headTransform;
     private bool give = false;
     public void Use(Transform head)
@@ -19,11 +20,16 @@ public class TakeObject : MonoBehaviour, IUsable
             if (distance < 1.5)
             {
                 give = false;
-                headTransform.TryGetComponent(out CounterBook counter);
-                counter.CountBooks();
+                SaveObject();
                 Destroy(gameObject);
             }
-                
+
         }
     }
+
+    public void SaveObject()
+    {
+        ObjectsData.Seinglinventory.SaveReceivedObjects(keyObject);
+    }
 }
+

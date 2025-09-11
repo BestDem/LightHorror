@@ -11,16 +11,18 @@ public class CameraController : MonoBehaviour
 
     [Header("GameObjects")]
     [SerializeField] private GameObject head;
+    private bool lockedCamera = true;
 
 
     void Start()
     {
-        Cursor.lockState = CursorLockMode.Locked;
+        //Cursor.lockState = CursorLockMode.Locked;
     }
 
     void Update()
     {
-        Look();
+        if(lockedCamera)
+            Look();
     }
 
     private void Look()
@@ -31,8 +33,17 @@ public class CameraController : MonoBehaviour
 
         //if (Mathf.Abs(Vector3.Angle(head.transform.forward, dir)) < 35f)
         //{
-            transform.Rotate(0, inputController.mouse.x * MouseSens, 0);
-            head.transform.Rotate(-inputController.mouse.y * MouseSens, 0, 0);
+        transform.Rotate(0, inputController.mouse.x * MouseSens, 0);
+        head.transform.Rotate(-inputController.mouse.y * MouseSens, 0, 0);
         //}
+    }
+
+    public void UnlockCamera(bool islockedCamera)
+    {
+        lockedCamera = islockedCamera;
+        if (lockedCamera)
+            Cursor.lockState = CursorLockMode.Locked;
+        else
+            Cursor.lockState = CursorLockMode.Confined;
     }
 }

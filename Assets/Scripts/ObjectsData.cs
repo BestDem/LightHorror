@@ -1,18 +1,22 @@
+using System;
 using UnityEngine;
 
-public class ObjectsData : ScriptableObject
+public class ObjectsData : MonoBehaviour
 {
-    public static ObjectsData instance = null;
-    void Start()
+    public static event Action SaveObject;
+    public static ObjectsData Seinglinventory { get; private set; }
+    private void Awake()
     {
-        // Теперь, проверяем существование экземпляра
-        if (instance == null)
-        { // Экземпляр менеджера был найден
-            instance = this; // Задаем ссылку на экземпляр объекта
-        }
-        else if (instance == this)
-        { // Экземпляр объекта уже существует на сцене
+        if (Seinglinventory == null)
+            Seinglinventory = this;
+        else
             Destroy(this);
-        }
+    }
+
+    public void SaveReceivedObjects(string key)
+    {
+        PlayerPrefs.SetInt(key, PlayerPrefs.GetInt(key) + 1);
+        SaveObject?.Invoke();
+        Debug.Log(key + PlayerPrefs.GetInt(key));
     }
 }

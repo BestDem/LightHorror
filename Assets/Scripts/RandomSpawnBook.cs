@@ -1,44 +1,27 @@
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class RandomSpawnBook : MonoBehaviour
 {
-    [SerializeField] private Transform[] pointTransform;
+    [SerializeField] private List<Transform> pointTransform;
     [SerializeField] private GameObject books;
-    private List<int> spawnedList = new();
-    private int sizeList;
+    private List<Transform> spawnedList = new();
     private int startCountBooks = 4;    //можно сделать несколько массивов со спавном и уровни сложности(+подвал, чердак)
-    private int currentSpawnBook = 0;
-    void Start()
+
+    private void Start()
     {
-        sizeList = pointTransform.Length;
-        int randomSpawn = Random.Range(0, sizeList);
-        spawnedList.Add(randomSpawn);
-        books = Instantiate(books, pointTransform[randomSpawn].transform.position, Quaternion.identity);
+        SpawnBooks();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void SpawnBooks()
     {
-        if (sizeList >= startCountBooks && currentSpawnBook < startCountBooks)
+        for (int i = 0; i < startCountBooks; i++)
         {
-            int randomSpawn = Random.Range(0, sizeList);
-            if (SpawnBooks(randomSpawn) == true)
-                currentSpawnBook += 1;
+            int random = Random.Range(0, pointTransform.Count);
+            spawnedList.Add(pointTransform[random]);
+            pointTransform.Remove(pointTransform[random]);
+            
+            books = Instantiate(books, spawnedList[i].transform.position, Quaternion.identity);
         }
-    }
-
-    private bool SpawnBooks(int randomSpawn)
-    {
-        for (int i = 0; i <= spawnedList.Count; i++)
-        {
-            if (i != randomSpawn && i == spawnedList.Count)
-                books = Instantiate(books, pointTransform[randomSpawn].transform.position, Quaternion.identity);
-            else if (i == randomSpawn)
-                return false;
-        }
-        Debug.Log(randomSpawn);
-        return true;
     }
 }
