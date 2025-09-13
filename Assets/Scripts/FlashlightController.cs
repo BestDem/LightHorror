@@ -16,6 +16,7 @@ public class FlashlightController : MonoBehaviour
         light.intensity = 0;
         currentTimer = maxCharge;
     }
+    
     private void Update() 
     {
         if (Input.GetKeyDown(KeyCode.Q))
@@ -57,9 +58,8 @@ public class FlashlightController : MonoBehaviour
         }
     }
 
-    public void GetLight(float battery)
+    public void UseObject()
     {
-        currentTimer = battery;
-        Debug.Log(currentTimer);
-    } 
+        currentTimer = maxCharge;
+    }
 }

@@ -9,6 +9,7 @@ public class MonsterReview : MonoBehaviour
     [SerializeField] private Transform[] routePoints;
     [SerializeField] private GameObject player;
     [SerializeField] private float viewingAngle;
+    [SerializeField] private float viewingAngleLight;
     [SerializeField] private FlashlightController flashlight;
     private NavMeshAgent monster;
     private bool isFollowing = false;
@@ -37,7 +38,7 @@ public class MonsterReview : MonoBehaviour
 
         if (distance > 2 && isWalkMonstor)
             monster.SetDestination(routePoints[randomPoint].position);
-        else if(distance < 2 || isWalkMonstor == false)
+        else if (distance < 2 || isWalkMonstor == false)
         {
             StartCoroutine(Waiting());
         }
@@ -45,8 +46,8 @@ public class MonsterReview : MonoBehaviour
 
     private void FollowPlayer()
     {
-        Vector3 dir = player.transform.position - transform.position;
-        if (Mathf.Abs(Vector3.Angle(transform.forward, dir)) < viewingAngle)
+        float distance = Vector3.Distance(routePoints[randomPoint].position, transform.position);
+        if (distance < viewingAngleLight && flashlight.isTurnOnLight || distance < viewingAngle)
         {
             monster.SetDestination(player.transform.position);
             isFollowing = true;

@@ -24,7 +24,7 @@ public class UseController : MonoBehaviour
         
         if (Physics.Raycast(ray, out hit, 15f))
         {
-            if (hit.collider.TryGetComponent<IUsable>(out IUsable useObject))
+            if (hit.collider.TryGetComponent(out IUsable useObject))
             {
                 aim.SetActive(true);
                 if (inputController.isFire)

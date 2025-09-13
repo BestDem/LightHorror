@@ -1527,7 +1527,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7be18833fb00ba4bb16e547e6b7486a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 2.81
   characterController: {fileID: 8654590043849355297}
   inputController: {fileID: 4208090195757270686}
 --- !u!114 &2841483736583021047
@@ -1571,7 +1570,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78e1ba4e74d33a245b53b4f10b3de440, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MouseSens: 2.96
+  MouseSens: 3.12
   inputController: {fileID: 4208090195757270686}
   head: {fileID: 7524037512757889398}
 --- !u!143 &8654590043849355297

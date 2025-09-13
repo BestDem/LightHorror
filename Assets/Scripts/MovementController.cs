@@ -3,8 +3,6 @@ using UnityEngine;
 
 public class MovementController : MonoBehaviour
 {
-    [Header("Movement vars")]
-    [SerializeField] private float speed;
 
     [Header("Settings")]
     [SerializeField] private CharacterController characterController;
@@ -23,16 +21,21 @@ public class MovementController : MonoBehaviour
 
     private void Update()
     {
-        Movement();
         AnimationWalk();
     }
 
 
-    public void Movement()
+    public void Movement(float speed)
     {
         Vector3 forwardMovement = transform.forward * inputController.movement.y * speed * Time.deltaTime;
         Vector3 rightMovement = transform.right * inputController.movement.x * speed * Time.deltaTime;
 
+        characterController.Move(forwardMovement);
+        characterController.Move(rightMovement);
+    }
+
+    public void ApplyGravity()
+    {
         if (characterController.isGrounded && gravity.y < 0)
         {
             gravity.y = 0;
@@ -40,8 +43,6 @@ public class MovementController : MonoBehaviour
 
         gravity.y += Physics.gravity.y * Time.deltaTime * Time.deltaTime;
 
-        characterController.Move(forwardMovement);
-        characterController.Move(rightMovement);
         characterController.Move(gravity);
     }
 
