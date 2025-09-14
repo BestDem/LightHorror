@@ -23,19 +23,4 @@ public class InventoryItem : MonoBehaviour
     {
         return ItemName;
     }
-
-    public int CountObject()
-    {
-        return PlayerPrefs.GetInt(ItemName);
-    }
-
-    public void SaveObject()
-    {
-        ObjectsData.Seinglinventory.SaveReceivedObjects(ItemName);
-    }
-    
-    public void SaveDelObject()
-    {
-        ObjectsData.Seinglinventory.SaveDeleteObjects(ItemName);
-    }
 }

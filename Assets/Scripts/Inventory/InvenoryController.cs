@@ -140,8 +140,6 @@ public class InvenoryController : MonoBehaviour
             inventory[index] = target;
 
             GameObject item = target.gameObject;
-            SaveCoutObject(index, target);    //индекс увеличивается даже если предмет этого типа есть в инвентаре
-
 
             if (item.TryGetComponent(out Rigidbody rigidbody))
             {
@@ -155,12 +153,13 @@ public class InvenoryController : MonoBehaviour
 
             HideAllItems();
 
+            itemsImage[index].TryGetComponent(out UnityEngine.UI.Image spriteItem);
+            spriteItem.sprite = target.GetSprite();
+
             currentInventoryItem = index;
             inventory[currentInventoryItem].gameObject.SetActive(true);
 
             target.PlayPickupSound();
-
-            Debug.Log(index);
         }
     }
 
@@ -181,7 +180,9 @@ public class InvenoryController : MonoBehaviour
                 rigidbody.isKinematic = false;
                 rigidbody.AddForce(head.transform.forward * ItemDropForce);
             }
-            DelCountObject(currentItem);
+            inventory[currentInventoryItem] = null;
+            itemsImage[currentInventoryItem].TryGetComponent(out UnityEngine.UI.Image spriteItem);
+            spriteItem.sprite = nonSprite;
         }
     }
 
@@ -191,10 +192,11 @@ public class InvenoryController : MonoBehaviour
         {
             if (inventory[currentInventoryItem].gameObject.TryGetComponent(out InteractObject interactObject))
             {
+                Destroy(inventory[currentInventoryItem].gameObject);
                 interactObject.UseObject();
-                inventory[currentInventoryItem].SaveDelObject();
-                InventoryItem item = inventory[currentInventoryItem];
-                countObjects[currentInventoryItem].text = item.CountObject().ToString();
+                inventory[currentInventoryItem] = null;
+                itemsImage[currentInventoryItem].TryGetComponent(out UnityEngine.UI.Image spriteItem);
+                spriteItem.sprite = nonSprite;
             }
         }
     }
@@ -215,7 +217,7 @@ public class InvenoryController : MonoBehaviour
     }
     private int GetAvailableIndex(InventoryItem itemAdd)
     {
-        int index = 0;
+        int index = -1;
         for (int i = 0; i < MaxInventoryItems; i++)
         {
             InventoryItem item = inventory[i];
@@ -224,14 +226,7 @@ public class InvenoryController : MonoBehaviour
                 index = i;
                 break;
             }
-            else if (inventory[i] == itemAdd)
-            {
-                Destroy(itemAdd);
-                index = i;
-                break;                
-            }
         }
-        Debug.Log(index + "индекс");
         return index;
     }
     public void Interact(RaycastHit hit)
@@ -248,38 +243,10 @@ public class InvenoryController : MonoBehaviour
 
     private void ChoiseObject(GameObject image, bool isActive)
     {
-        Debug.Log(image);
         image.TryGetComponent(out UnityEngine.UI.Image sprite);
-        Debug.Log(sprite + "картинка для затемнения");
         if (isActive)
             sprite.color = new Color32(255, 255, 255, 255);
         else
             sprite.color = new Color32(142, 142, 142, 255);
     }
-
-    private void DelCountObject(InventoryItem currentItem)
-    {
-        itemsImage[currentInventoryItem].TryGetComponent(out UnityEngine.UI.Image itemImage);
-        if (currentItem.CountObject() < 2)
-        {
-            itemImage.sprite = nonSprite;
-            inventory[currentInventoryItem] = null;
-        }
-        else
-            TakeItem(currentItem);   //надо сделать чтобы в руке появлялась копия предмета полсе его выкидывания
-
-        currentItem.SaveDelObject();
-        countObjects[currentInventoryItem].text = currentItem.CountObject().ToString();
-    }
-
-    private void SaveCoutObject(int index, InventoryItem target)
-    {
-        if (itemsImage[index].TryGetComponent(out UnityEngine.UI.Image spriteItem))
-        {
-            spriteItem.sprite = target.GetSprite();
-            target.SaveObject();
-            countObjects[index].text = target.CountObject().ToString();
-        }
-    }
-
 }
