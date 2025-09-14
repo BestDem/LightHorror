@@ -9,16 +9,6 @@ public class InventoryItem : MonoBehaviour
     [Header("Audio")]
     [SerializeField] private AudioSource AudioPickup;
 
-    public void Start()
-    {
-        
-    }
-
-    public void Update()
-    {
-        
-    }
-
     public Sprite GetSprite()
     {
         return sprite;
@@ -32,5 +22,20 @@ public class InventoryItem : MonoBehaviour
     public string GetItemName()
     {
         return ItemName;
+    }
+
+    public int CountObject()
+    {
+        return PlayerPrefs.GetInt(ItemName);
+    }
+
+    public void SaveObject()
+    {
+        ObjectsData.Seinglinventory.SaveReceivedObjects(ItemName);
+    }
+    
+    public void SaveDelObject()
+    {
+        ObjectsData.Seinglinventory.SaveDeleteObjects(ItemName);
     }
 }

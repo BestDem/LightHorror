@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &2376424180688719457
+--- !u!1 &4814613071885503331
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,50 +8,50 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 5104198718090144165}
-  - component: {fileID: 2900837232358367736}
-  - component: {fileID: 1820059218757484027}
-  - component: {fileID: 4760603919037011153}
-  - component: {fileID: 3347139524935914681}
-  - component: {fileID: 6973066755038565305}
-  - component: {fileID: 7060447756872343013}
+  - component: {fileID: 3055397341425777476}
+  - component: {fileID: 6504924001265369810}
+  - component: {fileID: 4590089765259631611}
+  - component: {fileID: 1357532157955403668}
+  - component: {fileID: 4268774538412098636}
+  - component: {fileID: 4744577493014151927}
+  - component: {fileID: 5105340397905692665}
   m_Layer: 0
-  m_Name: Battery
+  m_Name: Paper Stack
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &5104198718090144165
+--- !u!4 &3055397341425777476
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2376424180688719457}
+  m_GameObject: {fileID: 4814613071885503331}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: -1.4733213, y: 1.059, z: -54.42856}
-  m_LocalScale: {x: 8.1559, y: 8.1559, z: 8.1559}
+  m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
+  m_LocalPosition: {x: -0.41952762, y: 1.0381163, z: -54.68095}
+  m_LocalScale: {x: 588.1443, y: 588.1443, z: 588.1443}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &2900837232358367736
+--- !u!33 &6504924001265369810
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2376424180688719457}
-  m_Mesh: {fileID: -4821300124380478740, guid: 3046ae418399e0946ae5ef292cb0d44f, type: 3}
---- !u!23 &1820059218757484027
+  m_GameObject: {fileID: 4814613071885503331}
+  m_Mesh: {fileID: -1903777471819490273, guid: a8d33be47b4692748b30a0a971e90d35, type: 3}
+--- !u!23 &4590089765259631611
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2376424180688719457}
+  m_GameObject: {fileID: 4814613071885503331}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -68,7 +68,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 653802066b457f14c860ce20c438d072, type: 2}
+  - {fileID: -2692260554821041317, guid: a8d33be47b4692748b30a0a971e90d35, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -90,13 +90,40 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &4760603919037011153
+--- !u!54 &1357532157955403668
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4814613071885503331}
+  serializedVersion: 5
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!65 &4268774538412098636
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2376424180688719457}
+  m_GameObject: {fileID: 4814613071885503331}
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -109,30 +136,30 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.015401154, y: 0.0154011585, z: 0.041917115}
-  m_Center: {x: 0, y: 0, z: 0.020258084}
---- !u!114 &3347139524935914681
+  m_Size: {x: 0.0009106558, y: 0.0011175358, z: 0.00090072746}
+  m_Center: {x: 0.000049331316, y: -0.000010749665, z: 0.00045036364}
+--- !u!114 &4744577493014151927
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2376424180688719457}
+  m_GameObject: {fileID: 4814613071885503331}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e9464cd569b460d498ae47642a94401c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sprite: {fileID: 162810370, guid: 4d0ad96c163d6dd41a450136fdb95fae, type: 3}
-  ItemName: Battery
-  AudioPickup: {fileID: 6973066755038565305}
---- !u!82 &6973066755038565305
+  sprite: {fileID: 673315022, guid: 84cfb1a541f38424da1a8779cd5fff69, type: 3}
+  ItemName: Book
+  AudioPickup: {fileID: 5105340397905692665}
+--- !u!82 &5105340397905692665
 AudioSource:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2376424180688719457}
+  m_GameObject: {fileID: 4814613071885503331}
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
@@ -147,7 +174,7 @@ AudioSource:
   SpatializePostEffects: 0
   Priority: 128
   DopplerLevel: 1
-  MinDistance: 1
+  MinDistance: 1.3302383
   MaxDistance: 500
   Pan2D: 0
   rolloffMode: 0
@@ -223,30 +250,3 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!54 &7060447756872343013
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2376424180688719457}
-  serializedVersion: 5
-  m_Mass: 1
-  m_LinearDamping: 0
-  m_AngularDamping: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0

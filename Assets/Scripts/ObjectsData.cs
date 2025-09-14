@@ -13,10 +13,19 @@ public class ObjectsData : MonoBehaviour
             Destroy(this);
     }
 
+    private void Start()
+    {
+        PlayerPrefs.DeleteAll();
+        PlayerPrefs.Save();  
+    }
+
     public void SaveReceivedObjects(string key)
     {
         PlayerPrefs.SetInt(key, PlayerPrefs.GetInt(key) + 1);
-        SaveObject?.Invoke();
-        Debug.Log(key + PlayerPrefs.GetInt(key));
+    }
+
+    public void SaveDeleteObjects(string key)
+    {
+        PlayerPrefs.SetInt(key, PlayerPrefs.GetInt(key) - 1);
     }
 }

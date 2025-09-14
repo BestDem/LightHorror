@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class FlashlightController : MonoBehaviour
+public class FlashlightController : MonoBehaviour, InteractObject
 {
     [SerializeField] private Light light;
     [SerializeField] private Image batteryImage;
@@ -13,6 +13,7 @@ public class FlashlightController : MonoBehaviour
 
     private void Start()
     {
+        chargeBattery.text = maxCharge.ToString();
         light.intensity = 0;
         currentTimer = maxCharge;
     }
@@ -61,5 +62,6 @@ public class FlashlightController : MonoBehaviour
     public void UseObject()
     {
         currentTimer = maxCharge;
+        chargeBattery.text = Mathf.Round(currentTimer).ToString();
     }
 }

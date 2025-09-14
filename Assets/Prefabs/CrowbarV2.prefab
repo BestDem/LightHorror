@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 2471766544263859191}
   - component: {fileID: 2298598353611369133}
   - component: {fileID: 7322242031876079202}
-  - component: {fileID: -4130233383331636485}
   - component: {fileID: -6974336010635475376}
   - component: {fileID: 7680009972514284246}
   m_Layer: 0
@@ -139,19 +138,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.03507143, y: 0.0014358836, z: 0.0017142853}
   m_Center: {x: -0.00046428607, y: -0.0000120060395, z: -3.8013162e-10}
---- !u!114 &-4130233383331636485
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6032076858685190572}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7c9627957223ae34fbb3c3d1004cee77, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  keyObject: Crowbar
 --- !u!114 &-6974336010635475376
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -164,7 +150,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9464cd569b460d498ae47642a94401c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sprite: {fileID: 0}
+  sprite: {fileID: -477303465, guid: 9287af9bf1fc929448714085fee8e641, type: 3}
   ItemName: Crowbar
   AudioPickup: {fileID: 7680009972514284246}
 --- !u!82 &7680009972514284246
@@ -177,8 +163,8 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
-  m_Resource: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 3dcbb814bf3440f43a81aa8b1417c1ef, type: 3}
+  m_Resource: {fileID: 8300000, guid: 3dcbb814bf3440f43a81aa8b1417c1ef, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
@@ -224,7 +210,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0

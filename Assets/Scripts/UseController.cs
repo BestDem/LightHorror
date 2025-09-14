@@ -24,11 +24,11 @@ public class UseController : MonoBehaviour
         
         if (Physics.Raycast(ray, out hit, 15f))
         {
-            if (hit.collider.TryGetComponent(out IUsable useObject))
+            if (hit.collider.TryGetComponent(out InventoryItem inventory))
             {
                 aim.SetActive(true);
                 if (inputController.isFire)
-                    useObject.Use(head);
+                    InvenoryController.singltonInventory.Interact(hit);
             }
             else
             {
