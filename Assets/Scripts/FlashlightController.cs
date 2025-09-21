@@ -7,6 +7,7 @@ public class FlashlightController : MonoBehaviour, InteractObject
     [SerializeField] private Image batteryImage;
     [SerializeField] private Text chargeBattery;
     [SerializeField] private float maxCharge;
+    [SerializeField] private MusicManager musicManager;
     private float currentTimer;
     private bool isTurnOn = false;
     public bool isTurnOnLight => isTurnOn;
@@ -20,7 +21,7 @@ public class FlashlightController : MonoBehaviour, InteractObject
     
     private void Update() 
     {
-        if (Input.GetKeyDown(KeyCode.Q))
+        if (Input.GetKeyDown(KeyCode.E))
         {
             OnOrOffLight();
         }
@@ -46,6 +47,7 @@ public class FlashlightController : MonoBehaviour, InteractObject
 
     private void OnOrOffLight()
     {
+        musicManager.PlaySongByIndex(3);
         bool isLight = !isTurnOn;
         isTurnOn = isLight;
 

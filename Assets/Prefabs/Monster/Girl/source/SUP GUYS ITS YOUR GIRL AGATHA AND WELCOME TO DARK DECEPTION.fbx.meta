@@ -3,7 +3,22 @@ guid: 19fd18a23ee962845b1a0f2c81417ee0
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: M_Agatha_Dress
+    second: {fileID: 2100000, guid: 172a7a38ba57f3849a663dec448782b1, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: M_Agatha_Hair
+    second: {fileID: 2100000, guid: 79c6eaf95c1c65d49a4325731ccb3fac, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: M_Agatha_Skin
+    second: {fileID: 2100000, guid: 96e5d80c20b6d3847acea72a99aeb6a8, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

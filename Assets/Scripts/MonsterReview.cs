@@ -6,65 +6,93 @@ using UnityEngine.AI;
 public class MonsterReview : MonoBehaviour
 {
     [Tooltip("Mechanics")]
-    [SerializeField] private Transform[] routePoints;
-    [SerializeField] private GameObject player;
-    [SerializeField] private float viewingAngle;
-    [SerializeField] private float viewingAngleLight;
-    [SerializeField] private FlashlightController flashlight;
+    private Vector3 randomPoint;
+    private MusicManager musicManager;
     private NavMeshAgent monster;
-    private bool isFollowing = false;
+    private GameObject player;
+    private SpawnMonster spawnMonsterFind;
+    private bool isFollowing = true;
     private bool isWalkMonstor = false;
-    private int randomPoint;
+    private bool isPlayerHid = false;
 
+    private void Awake()
+    {
+
+        musicManager = GetComponent<MusicManager>();
+        GameObject playerFind = GameObject.FindGameObjectWithTag("Player");
+        spawnMonsterFind = FindAnyObjectByType<SpawnMonster>();
+        player = playerFind;
+    }
     void Start()
     {
-        randomPoint = UnityEngine.Random.Range(0, routePoints.Length);
+        musicManager.PlaySongByIndex(4);
+
         monster = GetComponent<NavMeshAgent>();
+        randomPoint = SpawnMonster.GetRandomPoint(player.transform.position, 20);
     }
 
     // Update is called once per frame
     void Update()
     {
-        FollowPlayer();
+        if (isPlayerHid == false)
+            FollowPlayer();
 
         if (isFollowing == false)
             RandomChoisePoint();
-
     }
 
     private void RandomChoisePoint()
     {
-        float distance = Vector3.Distance(routePoints[randomPoint].position, transform.position);
+        float distance = Vector3.Distance(randomPoint, transform.position);
 
         if (distance > 2 && isWalkMonstor)
-            monster.SetDestination(routePoints[randomPoint].position);
-        else if (distance < 2 || isWalkMonstor == false)
+            monster.SetDestination(randomPoint);
+        else if (distance < 2)
         {
-            StartCoroutine(Waiting());
+            DestroyMonster();
         }
     }
 
     private void FollowPlayer()
     {
-        float distance = Vector3.Distance(routePoints[randomPoint].position, transform.position);
-        if (distance < viewingAngleLight && flashlight.isTurnOnLight || distance < viewingAngle)
+        float distance = Vector3.Distance(player.transform.position, transform.position);
+        if (1 < distance)
         {
-            monster.SetDestination(player.transform.position);
             isFollowing = true;
+            monster.SetDestination(player.transform.position);
         }
         else
         {
-            isFollowing = false;
+            DestroyMonster();
+            //смерть и рестарт
         }
     }
 
     IEnumerator Waiting()
     {
+        Debug.Log("Ждем монстра");
         isWalkMonstor = false;
-        float randomWaitingTime = UnityEngine.Random.Range(1, 5);
+        float randomWaitingTime = UnityEngine.Random.Range(1, 3);
+        musicManager.PlaySongByIndex(6);
         yield return new WaitForSecondsRealtime(randomWaitingTime);
-        randomPoint = UnityEngine.Random.Range(0, routePoints.Length);
+
+        RandomChoisePoint();
 
         isWalkMonstor = true;
+    }
+
+    public void PlayerIsHid(bool isHid)
+    {
+        isPlayerHid = isHid;
+        isFollowing = !isFollowing;
+
+        StartCoroutine(Waiting());
+    }
+
+    private void DestroyMonster()
+    {
+        musicManager.PlaySongByIndex(5);
+        spawnMonsterFind.CanSpawnMonster();
+        Destroy(gameObject);
     }
 }

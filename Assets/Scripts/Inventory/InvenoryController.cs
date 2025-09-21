@@ -8,15 +8,14 @@ public class InvenoryController : MonoBehaviour
     public static InvenoryController singltonInventory { get; private set; }
     [SerializeField] private int MaxInventoryItems;
     [SerializeField] private KeyCode[] InventoryKeys;
-    [SerializeField] private float ItemDropForce;
     [SerializeField] private Transform head;
     [SerializeField] private Transform hand;
     [SerializeField] private GameObject[] itemsImage;
-    [SerializeField] private Text[] countObjects;
     [SerializeField] private Sprite nonSprite;
     private InventoryItem[] inventory;
     private Vector2 mouseWheel;
     private int currentInventoryItem;
+
     private void Start()
     {
         if (singltonInventory == null)
@@ -106,10 +105,7 @@ public class InvenoryController : MonoBehaviour
         if (inventory[currentInventoryItem])
         {
             inventory[currentInventoryItem].gameObject.SetActive(true);
-            //inventory[currentInventoryItem].PlayPickupSound();
         }
-
-        Debug.Log(currentInventoryItem);
     }
 
     private void PrevItem()
@@ -126,10 +122,7 @@ public class InvenoryController : MonoBehaviour
         if (inventory[currentInventoryItem])
         {
             inventory[currentInventoryItem].gameObject.SetActive(true);
-            //inventory[currentInventoryItem].PlayPickupSound();
         }
-
-        Debug.Log(currentInventoryItem);
     }
 
     public void TakeItem(InventoryItem target)
@@ -158,8 +151,9 @@ public class InvenoryController : MonoBehaviour
 
             currentInventoryItem = index;
             inventory[currentInventoryItem].gameObject.SetActive(true);
+            ChoiseObject(itemsImage[currentInventoryItem], true);
 
-            target.PlayPickupSound();
+            target.PlayPickupSound(0);
         }
     }
 
@@ -178,11 +172,14 @@ public class InvenoryController : MonoBehaviour
             if (item.TryGetComponent(out Rigidbody rigidbody))
             {
                 rigidbody.isKinematic = false;
-                rigidbody.AddForce(head.transform.forward * ItemDropForce);
+                rigidbody.AddForce(head.transform.forward * 4);
             }
+            currentItem.PlayPickupSound(1);
+
             inventory[currentInventoryItem] = null;
             itemsImage[currentInventoryItem].TryGetComponent(out UnityEngine.UI.Image spriteItem);
             spriteItem.sprite = nonSprite;
+            ChoiseObject(itemsImage[currentInventoryItem], true);
         }
     }
 

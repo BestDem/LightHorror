@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class ObjectsData : MonoBehaviour
 {
+    public GameObject canOpenDoor;
     public static event Action SaveObject;
     public static ObjectsData Seinglinventory { get; private set; }
     private void Awake()

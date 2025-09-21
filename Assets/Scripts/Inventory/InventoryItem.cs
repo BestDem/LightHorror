@@ -7,16 +7,16 @@ public class InventoryItem : MonoBehaviour
     [SerializeField] private string ItemName = "ITEM";
 
     [Header("Audio")]
-    [SerializeField] private AudioSource AudioPickup;
+    [SerializeField] private MusicManager musicManager;
 
     public Sprite GetSprite()
     {
         return sprite;
     }
 
-    public void PlayPickupSound()
+    public void PlayPickupSound(int index)
     {
-        AudioPickup.Play();
+        musicManager.PlaySongByIndex(index);
     }
 
     public string GetItemName()
