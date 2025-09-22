@@ -41,7 +41,6 @@ public class SpawnMonster : MonoBehaviour
 
     private void SpawnedMonster()
     {
-        Debug.Log("Спавн монстра");
         GameObject monsterPrefF = Instantiate(monsterPref, GetRandomPoint(player.transform.position, 15), Quaternion.identity);
         isSpawnMonster = true;
 
@@ -51,6 +50,7 @@ public class SpawnMonster : MonoBehaviour
 
     public void HidPlayer(bool isHidPl)
     {
+        Debug.Log("Спрятался" + isHidPl);
         isHid = isHidPl;
     }
 

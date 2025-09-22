@@ -65,14 +65,9 @@ public class InvenoryController : MonoBehaviour
             PrevItem();
         }
 
-        if (Input.GetMouseButtonDown(1))
-        {
-            DropItem();
-        }
-
         if (Input.GetMouseButtonDown(0))
         {
-            UseItem();
+            DropItem();
         }
 
         for (int i = 0; i < inventory.Length; i++)
@@ -183,7 +178,7 @@ public class InvenoryController : MonoBehaviour
         }
     }
 
-    private void UseItem()
+    public void UseItem()
     {
         if (inventory[currentInventoryItem])
         {
@@ -245,5 +240,15 @@ public class InvenoryController : MonoBehaviour
             sprite.color = new Color32(255, 255, 255, 255);
         else
             sprite.color = new Color32(142, 142, 142, 255);
+    }
+
+    public string ObjectInHand()
+    {
+        if (inventory[currentInventoryItem])
+        {
+            inventory[currentInventoryItem].gameObject.TryGetComponent(out InventoryItem inventoryItemComp);
+            return inventoryItemComp.GetItemName();
+        }
+        return null;
     }
 }

@@ -15,6 +15,7 @@ public class CameraController : MonoBehaviour
     [SerializeField] private GameObject head;
     private bool lockedCamera = true;
     private float _xRot = 0f;
+    private int reviewCamera = 60;
 
 
     void Start()
@@ -24,19 +25,14 @@ public class CameraController : MonoBehaviour
 
     void Update()
     {
-        if(lockedCamera)
+        if (lockedCamera)
             Lookk();
     }
 
-    private void Look()
-    {
-        transform.Rotate(0, inputController.mouse.x * MouseSens, 0);
-        headMove.transform.Rotate(-inputController.mouse.y * MouseSens, 0, 0);
-    }
     private void Lookk()
     {
         transform.Rotate(0, inputController.mouse.x * MouseSens, 0);
-        _xRot = Mathf.Clamp(_xRot - inputController.mouse.y * MouseSens, -90, 90);
+        _xRot = Mathf.Clamp(_xRot - inputController.mouse.y * MouseSens, -reviewCamera, reviewCamera);
         headMove.transform.localRotation = Quaternion.Euler(_xRot, 0, 0);
     }
 
@@ -48,5 +44,10 @@ public class CameraController : MonoBehaviour
             Cursor.lockState = CursorLockMode.Locked;
         else
             Cursor.lockState = CursorLockMode.Confined;
+    }
+
+    public void HidReview(int review)
+    {
+        reviewCamera = review;
     }
 }

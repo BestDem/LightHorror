@@ -4,21 +4,36 @@ public class OpenDoorTrigger : MonoBehaviour, InteractObject
 {
     [SerializeField] private Transform door;
     [SerializeField] private MusicManager musicManager;
+    [SerializeField] private bool needKey = false;
     private bool isOpen = false;
+    public bool IsOpen => isOpen;
 
     public void UseObject()
     {
-        if (isOpen)
+        if (needKey == false)
         {
-            door.rotation = Quaternion.Euler(0, 0, 0);
-            isOpen = false;
-            musicManager.PlaySongByIndex(2);
+            if (isOpen)
+            {
+                door.rotation = Quaternion.Euler(0, 0, 0);
+                isOpen = false;
+                musicManager.PlaySongByIndex(2);
+            }
+            else
+            {
+                door.rotation = Quaternion.Euler(0, 90, 0);
+                isOpen = true;
+                musicManager.PlaySongByIndex(2);
+            }
         }
         else
         {
-            door.rotation = Quaternion.Euler(0, 90, 0);
-            isOpen = true;
-            musicManager.PlaySongByIndex(2);
+            musicManager.PlaySongByIndex(8);
         }
+    }
+
+    public void OpenDoorKey()
+    {
+        musicManager.PlaySongByIndex(7);
+        needKey = false;
     }
 }

@@ -27,23 +27,29 @@ public class MovementController : MonoBehaviour
 
     public void Movement(float speed)
     {
-        Vector3 forwardMovement = transform.forward * inputController.movement.y * speed * Time.deltaTime;
-        Vector3 rightMovement = transform.right * inputController.movement.x * speed * Time.deltaTime;
+        if (canMove)
+        {
+            Vector3 forwardMovement = transform.forward * inputController.movement.y * speed * Time.deltaTime;
+            Vector3 rightMovement = transform.right * inputController.movement.x * speed * Time.deltaTime;
 
-        characterController.Move(forwardMovement);
-        characterController.Move(rightMovement);
+            characterController.Move(forwardMovement);
+            characterController.Move(rightMovement);
+        }
     }
 
     public void ApplyGravity()
     {
-        if (characterController.isGrounded && gravity.y < 0)
+        if (canMove)
         {
-            gravity.y = 0;
+            if (characterController.isGrounded && gravity.y < 0)
+            {
+                gravity.y = 0;
+            }
+
+            gravity.y += Physics.gravity.y * Time.deltaTime * Time.deltaTime;
+
+            characterController.Move(gravity);
         }
-
-        gravity.y += Physics.gravity.y * Time.deltaTime * Time.deltaTime;
-
-        characterController.Move(gravity);
     }
 
     private void AnimationWalk()
@@ -52,6 +58,16 @@ public class MovementController : MonoBehaviour
             animator.SetInteger("Walk", 1);
         else
             animator.SetInteger("Walk", 0);
+    }
+
+    public void HidePlayer(Transform transformHid, bool isHid)
+    {
+        canMove = !isHid;
+        if (gameObject.TryGetComponent(out Collider collider))
+        {
+            collider.enabled = canMove;
+        }
+        transform.position = transformHid.position;
     }
 
     public void SetCanMove(bool value)

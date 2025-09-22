@@ -2,7 +2,6 @@ using UnityEngine;
 
 public class UseController : MonoBehaviour
 {
-    [SerializeField] private GameObject aim;
     [SerializeField] private Transform head;
     [SerializeField] private float distationUse = 4;
     private InputController inputController;
@@ -29,24 +28,35 @@ public class UseController : MonoBehaviour
             direction = Vector3.Distance(head.position, hit.transform.position);
             if (direction < distationUse)
             {
-                if (hit.collider.TryGetComponent(out InventoryItem inventory))
+                if (hit.collider.TryGetComponent(out InventoryItem inventory))  //складывание предметов в инвентарь пкм
                 {
-                    aim.SetActive(true);
+                    ObjectsData.Seinglinventory.canOpenDoor.SetActive(true);
                     if (inputController.isFire)
                         InvenoryController.singltonInventory.Interact(hit);
                 }
 
-                if (hit.collider.TryGetComponent(out InteractObject interact))
+                if (hit.collider.TryGetComponent(out InteractObject interact))  //открытие дверей лкм
                 {
                     ObjectsData.Seinglinventory.canOpenDoor.SetActive(true);
                     if (Input.GetMouseButtonDown(1))
                         interact.UseObject();
                 }
+
+                if (hit.collider.TryGetComponent(out OpenDoorTrigger openDoor))  //открытие двери с ключом лкм
+                {
+                    if (Input.GetMouseButtonDown(1))
+                    {
+                        if (InvenoryController.singltonInventory.ObjectInHand() == "Key" && openDoor.IsOpen == false)
+                        {
+                            openDoor.OpenDoorKey();
+                            InvenoryController.singltonInventory.UseItem();
+                        }
+                    }
+                }
             }
             else
             {
                 ObjectsData.Seinglinventory.canOpenDoor.SetActive(false);
-                aim.SetActive(false);
             }
         }    
     }

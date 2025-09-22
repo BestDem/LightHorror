@@ -56,7 +56,7 @@ public class MonsterReview : MonoBehaviour
     private void FollowPlayer()
     {
         float distance = Vector3.Distance(player.transform.position, transform.position);
-        if (1 < distance)
+        if (2 < distance)
         {
             isFollowing = true;
             monster.SetDestination(player.transform.position);
