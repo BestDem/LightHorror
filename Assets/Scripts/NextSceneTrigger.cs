@@ -3,9 +3,37 @@ using UnityEngine.SceneManagement;
 
 public class NextSceneTrigger : MonoBehaviour
 {
-    private void OnTriggerEnter(Collider other)
+    [SerializeField] bool canExit;
+    [SerializeField] private int numberScene;
+    [SerializeField] private MusicManager musicManager;
+    public bool CanExit => canExit;
+
+    public void ExitHome()
     {
-        if (other.gameObject.tag == "Player")
-            SceneManager.LoadScene(1);
+        if (canExit)
+            SceneManager.LoadScene(numberScene);
+        else
+            musicManager.PlaySongByIndex(11);
+    }
+
+    public void OpenExitDoor()
+    {
+        musicManager.PlaySongByIndex(9);
+        canExit = true;
+    }
+
+    public void RestartScene()
+    {
+        SceneManager.LoadScene(1);
+    }
+
+    public void LoadScene(int scene)
+    {
+        SceneManager.LoadScene(scene);
+    }
+
+    public void ExitGame()
+    {
+        Application.Quit();
     }
 }

@@ -11,13 +11,13 @@ public class MonsterReview : MonoBehaviour
     private NavMeshAgent monster;
     private GameObject player;
     private SpawnMonster spawnMonsterFind;
+    private Animator animator;
     private bool isFollowing = true;
     private bool isWalkMonstor = false;
     private bool isPlayerHid = false;
 
     private void Awake()
     {
-
         musicManager = GetComponent<MusicManager>();
         GameObject playerFind = GameObject.FindGameObjectWithTag("Player");
         spawnMonsterFind = FindAnyObjectByType<SpawnMonster>();
@@ -29,9 +29,9 @@ public class MonsterReview : MonoBehaviour
 
         monster = GetComponent<NavMeshAgent>();
         randomPoint = SpawnMonster.GetRandomPoint(player.transform.position, 20);
+        animator = GetComponent<Animator>();
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (isPlayerHid == false)
@@ -43,6 +43,7 @@ public class MonsterReview : MonoBehaviour
 
     private void RandomChoisePoint()
     {
+        animator.SetBool("isWalk", true);
         float distance = Vector3.Distance(randomPoint, transform.position);
 
         if (distance > 2 && isWalkMonstor)
@@ -55,22 +56,25 @@ public class MonsterReview : MonoBehaviour
 
     private void FollowPlayer()
     {
+        animator.SetBool("isWalk", true);
         float distance = Vector3.Distance(player.transform.position, transform.position);
         if (2 < distance)
         {
             isFollowing = true;
             monster.SetDestination(player.transform.position);
         }
-        else
+        else if(distance < 2 || distance > 18)
         {
+            Debug.Log("убит или ушел на другой этаж");
             DestroyMonster();
-            //смерть и рестарт
+            TimeLineDeath.singeltonDeath.Death();
         }
     }
 
     IEnumerator Waiting()
     {
         Debug.Log("Ждем монстра");
+        animator.SetBool("isWalk", false);
         isWalkMonstor = false;
         float randomWaitingTime = UnityEngine.Random.Range(1, 3);
         musicManager.PlaySongByIndex(6);

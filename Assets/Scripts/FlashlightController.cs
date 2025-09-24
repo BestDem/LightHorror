@@ -21,7 +21,7 @@ public class FlashlightController : MonoBehaviour, InteractObject
     
     private void Update() 
     {
-        if (Input.GetKeyDown(KeyCode.E))
+        if (Input.GetKeyDown(KeyCode.F))
         {
             OnOrOffLight();
         }

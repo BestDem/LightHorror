@@ -65,7 +65,7 @@ public class InvenoryController : MonoBehaviour
             PrevItem();
         }
 
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(1))
         {
             DropItem();
         }
@@ -184,12 +184,12 @@ public class InvenoryController : MonoBehaviour
         {
             if (inventory[currentInventoryItem].gameObject.TryGetComponent(out InteractObject interactObject))
             {
-                Destroy(inventory[currentInventoryItem].gameObject);
                 interactObject.UseObject();
-                inventory[currentInventoryItem] = null;
-                itemsImage[currentInventoryItem].TryGetComponent(out UnityEngine.UI.Image spriteItem);
-                spriteItem.sprite = nonSprite;
             }
+            Destroy(inventory[currentInventoryItem].gameObject);
+            inventory[currentInventoryItem] = null;
+            itemsImage[currentInventoryItem].TryGetComponent(out UnityEngine.UI.Image spriteItem);
+            spriteItem.sprite = nonSprite;
         }
     }
     private void HideAllItems()
