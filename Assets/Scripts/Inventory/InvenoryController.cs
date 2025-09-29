@@ -6,6 +6,8 @@ using UnityEngine.UI;
 public class InvenoryController : MonoBehaviour
 {
     public static InvenoryController singltonInventory { get; private set; }
+    [SerializeField] private Text noteText;
+    [SerializeField] private GameObject NoteList;
     [SerializeField] private int MaxInventoryItems;
     [SerializeField] private KeyCode[] InventoryKeys;
     [SerializeField] private Transform head;
@@ -250,5 +252,17 @@ public class InvenoryController : MonoBehaviour
             return inventoryItemComp.GetItemName();
         }
         return null;
+    }
+
+    public void ConclusionTextTiNote(string textNote)
+    {
+        NoteList.SetActive(true);
+        noteText.text = textNote;
+
+        Invoke("CloseNote", 3);
+    }
+    private void CloseNote()
+    {
+        NoteList.SetActive(false);
     }
 }

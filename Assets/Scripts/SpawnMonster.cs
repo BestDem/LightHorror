@@ -21,9 +21,8 @@ public class SpawnMonster : MonoBehaviour
 
     private void Update()
     {
-        if (isSpawnMonster == false)
         {
-            currentTimer += flashlight.isTurnOnLight ? 1 : 0 + Time.deltaTime;
+            currentTimer += flashlight.isTurnOnLight ? 0.04f : 0 + Time.deltaTime;
 
             if (currentTimer > timeToSpawn && isSpawnMonster == false)
             {
@@ -34,9 +33,9 @@ public class SpawnMonster : MonoBehaviour
         }
     }
 
-    public void CanSpawnMonster()
+    public void CanSpawnMonster(bool spawn)
     {
-        isSpawnMonster = false;
+        isSpawnMonster = spawn;
     }
 
     private void SpawnedMonster()

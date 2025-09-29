@@ -6,7 +6,7 @@ public class RandomSpawnBook : MonoBehaviour
     [SerializeField] private List<Transform> pointTransform;
     [SerializeField] private GameObject books;
     private List<Transform> spawnedList = new();
-    private int startCountBooks = 4;    //можно сделать несколько массивов со спавном и уровни сложности(+подвал, чердак)
+    private int startCountBooks = 5;    //можно сделать несколько массивов со спавном и уровни сложности(+подвал, чердак)
 
     private void Start()
     {

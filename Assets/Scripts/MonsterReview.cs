@@ -96,7 +96,7 @@ public class MonsterReview : MonoBehaviour
     private void DestroyMonster()
     {
         musicManager.PlaySongByIndex(5);
-        spawnMonsterFind.CanSpawnMonster();
+        spawnMonsterFind.CanSpawnMonster(false);
         Destroy(gameObject);
     }
 }
