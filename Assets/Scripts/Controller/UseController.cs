@@ -2,12 +2,12 @@ using UnityEngine;
 
 public class UseController : MonoBehaviour
 {
+    [SerializeField] private Screen_fader screen_Fader;
     [SerializeField] private Transform head;
     [SerializeField] private float distationUse = 4;
     private float direction;
 
-    // Update is called once per frame
-    private void FixedUpdate()
+    private void Update()
     {
         Shoot();
     }
@@ -61,12 +61,27 @@ public class UseController : MonoBehaviour
                         }
                     }
                 }
+                if (hit.collider.TryGetComponent(out FlathLight flathLight))  //обновление батарейки
+                {
+                    ObjectsData.Seinglinventory.canOpenDoor.SetActive(true);
+                    if (Input.GetMouseButtonDown(0))
+                    {
+                        if (InvenoryController.singltonInventory.ObjectInHand() == "Battery")
+                        {
+                            flathLight.UseObject();
+                            InvenoryController.singltonInventory.UseItem();
+                        }
+                    }
+                }
 
                 if (hit.collider.TryGetComponent(out NextSceneTrigger exit))  //открытие двери на выход
                 {
                     ObjectsData.Seinglinventory.canOpenDoor.SetActive(true);
                     if (Input.GetKeyDown(KeyCode.E) && exit.CanExit)
+                    {
+                        screen_Fader.ImageNoVisible();
                         exit.ExitHome();
+                    }
                 }
             }
                 else

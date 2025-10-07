@@ -15,6 +15,7 @@ public class MonsterReview : MonoBehaviour
     private bool isFollowing = true;
     private bool isWalkMonstor = false;
     private bool isPlayerHid = false;
+    private float timer = 0;
 
     private void Awake()
     {
@@ -34,6 +35,10 @@ public class MonsterReview : MonoBehaviour
 
     void Update()
     {
+        timer += 0.04f;
+        if(timer > 9)
+            musicManager.PlaySongByIndex(4);
+            
         if (isPlayerHid == false)
             FollowPlayer();
 
@@ -73,10 +78,9 @@ public class MonsterReview : MonoBehaviour
 
     IEnumerator Waiting()
     {
-        Debug.Log("Ждем монстра");
-        animator.SetBool("isWalk", false);
         isWalkMonstor = false;
         float randomWaitingTime = UnityEngine.Random.Range(1, 3);
+        Debug.Log("Ждем монстра");
         musicManager.PlaySongByIndex(6);
         yield return new WaitForSecondsRealtime(randomWaitingTime);
 

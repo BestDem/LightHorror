@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -18,11 +19,16 @@ public class NextSceneTrigger : MonoBehaviour
     {
         if (canExit)
         {
-            PlayerPrefs.SetInt("Spawn", 1);
-            SceneManager.LoadScene(numberScene);
+            Invoke("Exithome", 2f);
         }
         else
             musicManager.PlaySongByIndex(11);
+    }
+
+    private void Exithome()
+    {
+        PlayerPrefs.SetInt("Spawn", 1);
+        SceneManager.LoadScene(numberScene);
     }
 
     public void OpenExitDoor()
@@ -38,7 +44,13 @@ public class NextSceneTrigger : MonoBehaviour
 
     public void LoadScene(int scene)
     {
-        SceneManager.LoadScene(scene);
+        StartCoroutine(Load(scene));
+    }
+
+    IEnumerator Load(int scen)
+    {
+        yield return new WaitForSecondsRealtime(2);
+        SceneManager.LoadScene(scen);
     }
 
     public void ExitGame()

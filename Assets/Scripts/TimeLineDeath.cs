@@ -3,6 +3,8 @@ using UnityEngine.Playables;
 
 public class TimeLineDeath : MonoBehaviour
 {
+    [SerializeField] private GameObject player;
+    [SerializeField] private GameObject spawn;
     public static TimeLineDeath singeltonDeath { get; private set; }
     [SerializeField] private PlayableDirector director;
     private void Start()
@@ -15,5 +17,10 @@ public class TimeLineDeath : MonoBehaviour
     public void Death()
     {
         director.Play();
+    }
+
+    public void TeleportPlayer()
+    {
+        player.transform.position = spawn.transform.position;
     }
 }

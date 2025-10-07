@@ -1,5 +1,7 @@
+using System;
 using UnityEngine;
 using UnityEngine.Audio;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 public class GameSettings : MonoBehaviour
@@ -7,11 +9,10 @@ public class GameSettings : MonoBehaviour
     [SerializeField] private AudioMixer audioMixerSound;
     [SerializeField] private Slider volumeAudioSound;
     [SerializeField] private Slider mouseSpeed;
+    public static event Action<float> ChangeSens;
     
     private string MUSIC_VOLUME_KEY = "MasterVolume";
     private string MOUSE_SPEED_KEY = "MouseVolume";
-
-    [SerializeField] private CameraController cameraController;
     
     private float masterVolume;
     private float mouseVolume;
@@ -25,14 +26,14 @@ public class GameSettings : MonoBehaviour
         volumeAudioSound.value = masterVolume;
 
         ApplySoundVolume(masterVolume);
-        cameraController.ChangeSensMouse(mouseVolume);
+        ChangeSens?.Invoke(mouseVolume);
     }
 
     public void SetVolumeMouse(float newVolume)
     {
         mouseVolume = Mathf.Clamp01(newVolume);
         
-        cameraController.ChangeSensMouse(mouseVolume);
+        ChangeSens?.Invoke(mouseVolume);
         
         PlayerPrefs.SetFloat(MOUSE_SPEED_KEY, mouseVolume);
         PlayerPrefs.Save();

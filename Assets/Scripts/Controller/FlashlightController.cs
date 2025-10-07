@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class FlashlightController : MonoBehaviour, InteractObject
+public class FlashlightController : MonoBehaviour
 {
     [SerializeField] private Light light;
     [SerializeField] private Image batteryImage;
@@ -53,15 +53,15 @@ public class FlashlightController : MonoBehaviour, InteractObject
 
         if (isTurnOn)
         {
-            light.intensity = Mathf.Lerp(0, 8, 0.03f);
+            light.intensity = Mathf.Lerp(8, 0, 0.03f);
         }
         else
         {
-            light.intensity = Mathf.Lerp(8, 0, 0.03f);
+            light.intensity = Mathf.Lerp(0, 8, 0.03f);
         }
     }
 
-    public void UseObject()
+    public void ResetBattery()
     {
         currentTimer = maxCharge;
         chargeBattery.text = Mathf.Round(currentTimer).ToString();

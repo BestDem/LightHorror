@@ -1,12 +1,18 @@
+using JetBrains.Annotations;
 using UnityEngine;
 
 public class OpenDoorTrigger : MonoBehaviour, InteractObject
 {
-    [SerializeField] private Transform door;
     [SerializeField] private MusicManager musicManager;
     [SerializeField] private bool needKey = false;
+    private Transform door;
     private bool isOpen = false;
     public bool IsOpen => isOpen;
+
+    private void Start()
+    {
+        door = GetComponent<Transform>();
+    }
 
     public void UseObject()
     {

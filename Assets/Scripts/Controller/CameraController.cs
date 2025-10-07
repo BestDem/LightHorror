@@ -17,6 +17,14 @@ public class CameraController : MonoBehaviour
     private float _xRot = 0f;
     private int reviewCamera = 60;
 
+    private void OnEnable()
+    {
+        GameSettings.ChangeSens += ChangeSensMouse;
+    }
+    private void OnDisable()
+    {
+        GameSettings.ChangeSens -= ChangeSensMouse;
+    }
 
     void Start()
     {
